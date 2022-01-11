@@ -10,7 +10,7 @@ function mostrarTextoParrafo() {
   console.log('El texto del segundo párrafo es ' + parrafo.textContent);
 }
 
-//funcion que muestra el numero de a que tiene la pagina
+//funcion que muestra el numero de 'a' que tiene la pagina
 function contarEnlaces() {
   const numeroEnlaces = document.getElementsByTagName('a').length;
   console.log('La página tiene ' + numeroEnlaces + ' enlaces');
