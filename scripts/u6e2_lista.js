@@ -11,22 +11,24 @@ window.addEventListener('DOMContentLoaded', (event) => {
 
 //añade una nueva lista al documento html
 function addNewList() {
-  const main = document.getElementsByTagName('main')[0];
+  const box = document.getElementById('box');
   const section = document.createElement('section');
   const unorderedList = document.createElement('ul');
 
   const btn = document.createElement('button');
   btn.setAttribute('class', 'main');
   btn.textContent = 'Añadir tarea';
+  btn.setAttribute('class', 'btAdd');
   //borde de la seccion, se puede quitar
-  section.style.border = '1px solid red';
-  main.appendChild(section);
+  section.setAttribute('class', 'listaTarea');
+  box.appendChild(section);
   section.appendChild(unorderedList);
   const listName = prompt('Indica el nombre de la lista');
   const titleListName = document.createElement('p');
   titleListName.textContent = `Nombre de la lista: ${listName}`;
-  unorderedList.appendChild(titleListName);
-  unorderedList.appendChild(btn);
+  section.appendChild(titleListName);
+  section.appendChild(btn);
+  section.appendChild(unorderedList);
   unorderedList.addEventListener('dragover', onDragOver);
   unorderedList.addEventListener('drop', onDrop);
   //Cuando se clicke al boton 'Añadir tarea' se llama a addNewTask
@@ -41,12 +43,13 @@ function addNewTask() {
   } else if (this.className == 'after') {
     this.parentNode.insertAdjacentElement('afterend', li);
   } else {
-    this.parentNode.appendChild(li);
+    this.parentNode.lastChild.appendChild(li);
   }
 }
 
 function createLi() {
   const li = document.createElement('li');
+  li.addEventListener('dragover', noAllowDrop);
   const taskName = prompt('Indica el nombre de la tarea');
   const task = document.createElement('p');
   task.textContent = taskName;
@@ -54,7 +57,6 @@ function createLi() {
   li.draggable = true;
   li.addEventListener('dragstart', onDragStart);
   li.appendChild(task);
-  li.style.border = '1px solid green';
 
   //boton que permite añadir una tarea antes de la actual
   const btnBefore = document.createElement('button');
@@ -73,9 +75,11 @@ function createLi() {
 
   return li;
 }
+
 function onDragStart(event) {
-  event.dataTransfer.setData('text/plain', event.target.id);
-  event.currentTarget.style.background = 'red';
+  event.dataTransfer.effectAllowed = 'move';
+  this.setAttribute('id', 'drag');
+  event.dataTransfer.setData('clave', event.target.id);
 }
 
 function onDragOver(event) {
@@ -83,8 +87,12 @@ function onDragOver(event) {
 }
 
 function onDrop(event) {
-  const draggableElement = document.getElementsByTagName('li');
-  const dropzone = event.target;
-  dropzone.appendChild(draggableElement[0]);
+  event.preventDefault();
+  const data = event.dataTransfer.getData('clave');
+  event.target.appendChild(document.getElementById(data));
+  document.getElementById(data).removeAttribute('id');
   event.dataTransfer.clearData();
+}
+function noAllowDrop(event) {
+  event.stopPropagation();
 }

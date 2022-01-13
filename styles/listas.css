@@ -1,0 +1,87 @@
+body {
+  background: whitesmoke;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen,
+    Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+}
+main {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1em;
+}
+#box {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 2em;
+}
+.listaTarea {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 20em;
+  border: 1px solid #111827;
+  border-radius: 0.75rem;
+}
+.listaTarea > p {
+  font-size: 1.2em;
+}
+.listaTarea > ul {
+  border: 1px solid #6b7280;
+  padding: 2em;
+  list-style: none;
+  width: 14em;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5em;
+}
+.listaTarea > ul > li {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background: #828b7a48;
+  border: 1px solid #047786;
+  border-radius: 0.75rem;
+  padding: 0.5em;
+  list-style: none;
+  min-width: 12em;
+  gap: 0.5em;
+  cursor: grab;
+}
+.listaTarea > ul > li:focus {
+  cursor: grabbing;
+}
+.listaTarea > ul > li > button {
+  width: 10em;
+  background-color: #331e36;
+  border: 1px solid transparent;
+  border-radius: 0.4rem;
+  font-size: 0.9em;
+  color: white;
+  padding: 0.5em;
+  cursor: pointer;
+}
+
+.btAdd {
+  background-color: #111827;
+  font-size: 1.2em;
+  padding: 0.5em;
+  color: white;
+  border: 1px solid transparent;
+  border-radius: 0.75rem;
+  text-decoration: none #6b7280 solid;
+  transition-duration: 0.2s;
+  transition-property: background-color, border-color, color, fill, stroke;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  cursor: pointer;
+}
+
+.btAdd:hover {
+  background-color: #374151;
+}
+
+.btAdd:focus {
+  box-shadow: none;
+  outline: 2px solid transparent;
+  outline-offset: 2px;
+}
